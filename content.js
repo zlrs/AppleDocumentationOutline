@@ -165,15 +165,18 @@ function workflow() {
   // 添加大纲到DOM
   const p = document.createElement('p')
   p.setAttribute('class', 'title')
-  p.setAttribute('style', 'color: #333; font-size: 14px; font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;font-weight: 600;margin-bottom: .5rem;    text-rendering: optimizeLegibility;')
+  p.setAttribute('style', 'color: #333; font-size: 14px; font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif; font-weight: 600; margin-bottom: .5rem; text-rendering: optimizeLegibility;')
   p.innerHTML = "Outline"
+  
   const ul = createUnorderedListTag(allOutlines)
-  ul.setAttribute('style', 'margin-left: 0;')
+  ul.setAttribute('style', 'margin-left: 0; margin-top: 0;')
+  
   const allOutlineDOM = document.createElement('div')
   allOutlineDOM.setAttribute('style', 'font-size: 14px; color: #555;')
   allOutlineDOM.setAttribute('class', 'outline-helper')
   allOutlineDOM.appendChild(p)
   allOutlineDOM.appendChild(ul)
+
   const summaryColSection = document.getElementsByClassName("col summary").getValueAtIndex(0)
   const noOutlineAdded = summaryColSection.getElementsByClassName('outline-helper').length <= 0
   if(summaryColSection && noOutlineAdded) {
