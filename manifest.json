@@ -1,0 +1,34 @@
+{
+    "manifest_version": 2,
+    "name": "Apple Documentation Outline",
+    "version": "0.1.10",
+  
+    "description": "Provide contents outline for Apple Developer Documentation.",
+    "permissions": ["tabs", "webNavigation", "*://developer.apple.com/documentation/*"],
+
+    "content_scripts": [
+        {
+            "matches": [
+                "http://developer.apple.com/documentation/technologies",
+                "https://developer.apple.com/documentation/technologies"
+            ],
+            "js": ["content-Technologies.js"]
+        },
+        {
+            "matches": [
+                "http://developer.apple.com/documentation/*",
+                "https://developer.apple.com/documentation/*"
+            ],
+            "exclude_globs": [
+                "*://developer.apple.com/documentation/technologies",
+                "*://developer.apple.com/documentation"
+            ],
+            "all_frames": false,
+            "js": ["content.js"]
+        }
+    ],
+
+    "background": {
+        "scripts": ["background.js"]
+    }
+}
