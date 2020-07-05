@@ -1,7 +1,7 @@
 let DEBUG = false
 const originLogFunction = console.log
 console.log = (line) => {
-  if(DEBUG) {
+  if (DEBUG) {
     originLogFunction(line)
   }
 }
@@ -9,7 +9,7 @@ console.log = (line) => {
 console.log("content.js running")
 
 Array.prototype.getValueAtIndex = function (index) {
-  if(Number.isInteger(index) && index >= 0 && index < this.length) {
+  if (Number.isInteger(index) && index >= 0 && index < this.length) {
     return this[index]
   }
   return null
@@ -29,9 +29,9 @@ function logOutlines(outlines) {
 function getPrimarySectionOutlines() {
   let primarySectionOutlines = []
   let primarySection = document.getElementsByClassName('primary-content').getValueAtIndex(0)
-  if(!primarySection) { return [] }
+  if (!primarySection) { return [] }
   let content = primarySection.getElementsByClassName('content').getValueAtIndex(0)
-  if(!content) { return [] }
+  if (!content) { return [] }
 
   for (let i in content.children) {
     let childElem = content.children[i]
@@ -54,14 +54,14 @@ function getPrimarySectionOutlines() {
     }
   }
   logOutlines(primarySectionOutlines)
-  return(primarySectionOutlines)
+  return (primarySectionOutlines)
 }
 
 function getTopicsSectionOutlines() {
   let topicsSection = document.getElementById("topics")
-  if(!topicsSection) { return [] }
+  if (!topicsSection) { return [] }
   let container = topicsSection.getElementsByClassName("container").getValueAtIndex(0)
-  if(!container) { return [] }
+  if (!container) { return [] }
 
   let topicsSectionOutlines = [{
     tagName: 'h2',
@@ -100,7 +100,7 @@ function createUnorderedListTag(dataArray) {
     return a
   }
   function addTextToLiTag(li, text, id = '') {
-    if(id && text && text.length > 0) {
+    if (id && text && text.length > 0) {
       let href = document.URL.split("#")[0] + '#' + id
       let a = createATagWithHref(text, href)
       li.appendChild(a)
@@ -122,8 +122,8 @@ function createUnorderedListTag(dataArray) {
     let li = document.createElement('li')
     /* 添加本li的a节点或文本 */
     addTextToLiTag(li, dataArray[i].text, dataArray[i].id)
-    
-    if(dataArray[i].tagName === 'h2') {
+
+    if (dataArray[i].tagName === 'h2') {
       li.setAttribute('style', 'list-style: none;')
     }
 
@@ -175,10 +175,10 @@ function workflow() {
   p.setAttribute('class', 'title')
   p.setAttribute('style', 'color: #333; font-size: 14px; font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif; font-weight: 600; margin-bottom: .5rem; text-rendering: optimizeLegibility;')
   p.innerHTML = "Outline"
-  
+
   const ul = createUnorderedListTag(allOutlines)
   ul.setAttribute('style', 'margin-left: 0; margin-top: 0;')
-  
+
   const allOutlineDOM = document.createElement('div')
   allOutlineDOM.setAttribute('style', 'font-size: 14px; color: #555;')
   allOutlineDOM.setAttribute('class', 'outline-helper')
@@ -186,9 +186,11 @@ function workflow() {
   allOutlineDOM.appendChild(ul)
 
   const summaryColSection = document.getElementsByClassName("col summary").getValueAtIndex(0)
-  const noOutlineAdded = summaryColSection.getElementsByClassName('outline-helper').length <= 0
-  if(summaryColSection && noOutlineAdded) {
-    summaryColSection.appendChild(allOutlineDOM)
+  if (summaryColSection) {
+    const outlineNotAddedYet = summaryColSection.getElementsByClassName('outline-helper').length <= 0
+    if (outlineNotAddedYet) {
+      summaryColSection.appendChild(allOutlineDOM)
+    }
   }
 }
 
