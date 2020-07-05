@@ -171,10 +171,12 @@ function workflow() {
   ul.setAttribute('style', 'margin-left: 0;')
   const allOutlineDOM = document.createElement('div')
   allOutlineDOM.setAttribute('style', 'font-size: 14px; color: #555;')
+  allOutlineDOM.setAttribute('class', 'outline-helper')
   allOutlineDOM.appendChild(p)
   allOutlineDOM.appendChild(ul)
   const summaryColSection = document.getElementsByClassName("col summary").getValueAtIndex(0)
-  if(summaryColSection) {
+  const noOutlineAdded = summaryColSection.getElementsByClassName('outline-helper').length <= 0
+  if(summaryColSection && noOutlineAdded) {
     summaryColSection.appendChild(allOutlineDOM)
   }
 }
