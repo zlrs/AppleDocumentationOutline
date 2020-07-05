@@ -91,6 +91,15 @@ function createUnorderedListTag(dataArray) {
     })
     return a
   }
+  function addTextToLiTag(li, text, id = '') {
+    if(id && text && text.length > 0) {
+      let href = document.URL.split("#")[0] + '#' + id
+      let a = createATagWithHref(text, href)
+      li.appendChild(a)
+    } else {
+      li.innerHTML = text
+    }
+  }
 
   for (let i = 0; i < dataArray.length - 1; ++i) {
     if (dataArray[i].level < dataArray[i + 1].level) {
@@ -103,36 +112,25 @@ function createUnorderedListTag(dataArray) {
   let ul = document.createElement('ul')
   for (let i = 0; i < dataArray.length; ++i) {
     let li = document.createElement('li')
+    /* 添加本li的a节点或文本 */
+    addTextToLiTag(li, dataArray[i].text, dataArray[i].id)
+    
+    if(dataArray[i].tagName === 'h2') {
+      li.setAttribute('style', 'list-style: none;')
+    }
+
     if (dataArray[i].hasSubItem) {
-      /* 计算创建子unordered list所需要的数据 */
-      let dataArraySlice = []
+      let dataArraySlice = []  /* 创建子unordered list所需要的数据 */
       let j = i + 1
       for (; j < dataArray.length && dataArray[i].level < dataArray[j].level; ++j) {
         dataArraySlice.push(dataArray[j])
       }
-      /* 添加本li的a节点或文本 */
-      if (dataArray[i].id) {
-        let href = document.URL.split("#")[0] + '#' + dataArray[i].id
-        let a = createATagWithHref(dataArray[i].text, href)
-        li.appendChild(a)
-      } else {
-        li.innerHTML = dataArray[i].text
-      }
-      /* 递归添加子unordered list */
       if (dataArraySlice.length > 0) {
-        li.appendChild(createUnorderedListTag(dataArraySlice))
+        li.appendChild(createUnorderedListTag(dataArraySlice))  /* 递归添加子unordered list */
       }
-      /* 下次循环从下一个同level的元素开始 */
-      i = j - 1
-    } else {
-      if (dataArray[i].id) {
-        let href = document.URL.split("#")[0] + '#' + dataArray[i].id
-        let a = createATagWithHref(dataArray[i].text, href)
-        li.appendChild(a)
-      } else {
-        li.innerHTML = dataArray[i].text
-      }
+      i = j - 1  /* 下次循环从下一个同level的元素开始 */
     }
+
     ul.appendChild(li)
   }
 
@@ -170,6 +168,7 @@ function workflow() {
   p.setAttribute('style', 'color: #333; font-size: 14px; font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;font-weight: 600;margin-bottom: .5rem;    text-rendering: optimizeLegibility;')
   p.innerHTML = "Outline"
   const ul = createUnorderedListTag(allOutlines)
+  ul.setAttribute('style', 'margin-left: 0;')
   const allOutlineDOM = document.createElement('div')
   allOutlineDOM.setAttribute('style', 'font-size: 14px; color: #555;')
   allOutlineDOM.appendChild(p)
