@@ -1,3 +1,11 @@
+let DEBUG = false
+const originLogFunction = console.log
+console.log = (line) => {
+  if(DEBUG) {
+    originLogFunction(line)
+  }
+}
+
 console.log("content.js running")
 
 Array.prototype.getValueAtIndex = function (index) {
