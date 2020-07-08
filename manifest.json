@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
     "name": "Apple Documentation Outline Helper",
-    "version": "0.2.4",
+    "version": "0.2.5",
   
     "description": "Provide contents outline for Apple Developer Documentation.",
-    "permissions": ["webNavigation", "*://developer.apple.com/documentation/*"],
+    "permissions": ["webNavigation", "http://developer.apple.com/documentation/*", "https://developer.apple.com/documentation/*"],
 
     "content_scripts": [
         {
