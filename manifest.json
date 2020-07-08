@@ -33,6 +33,7 @@
     },
 
     "icon": {
-        "128": "assets/icon_128px.png"
+        "128": "assets/icon_128px.png",
+        "48": "assets/icon_48px.png"
     }
 }
