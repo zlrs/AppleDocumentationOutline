@@ -1,3 +1,6 @@
+Note: Apple added the outline view to its documentation website. Because the feature has been implemented, this project is now archived. Please do not use it.
+
+---
 # Apple Documentation Outline Helper
 Apple developers read [Apple Developer Documentation](https://developer.apple.com/documentation/) frequently in their daily work. Although the documentation is well written, it doesn't provide a content outline that help developers get the structure of the articles. 
 
